@@ -7,12 +7,12 @@ stopbtn=document.querySelector(".stop");
 startbtn.addEventListener('click',startfun);
 stopbtn.addEventListener('click',stopfun);
 resetbtn.addEventListener('click',resetfun);
-let stopwatch;
+let stopwatch=null;
 function startfun(ele)
 {   
-    startbtn.classList.toggle("hide");
-    stopbtn.classList.toggle("hide");
+    
     let curr_time=parseInt(ele.target.dataset.start);
+    if(stopwatch==null){
      stopwatch=setInterval(() => {
         curr_time+=1;
         let millisec=curr_time%10;
@@ -22,20 +22,20 @@ function startfun(ele)
         ele.target.dataset.start=curr_time;
         timer.innerText=stopwatch_display;
     }, 100);
+}
     
 }
 function stopfun()
 {
-    startbtn.classList.toggle("hide");
-    stopbtn.classList.toggle("hide");
+   
     clearInterval(stopwatch);
-   console.log( startbtn.dataset.start);
+    stopwatch=null;
+    console.log( startbtn.dataset.start);
 }
 
 function resetfun()
 {
-    stopbtn.classList.add("hide");
-    startbtn.classList.remove("hide");
+   
     clearInterval(stopwatch);
     startbtn.dataset.start=timer.innerText="00:00:00";
 }
